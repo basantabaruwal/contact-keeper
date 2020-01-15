@@ -1,0 +1,42 @@
+*,*::before,*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* App specific css */
+.contact-box {
+    background: violet;
+    position: relative;
+}
+
+.contact-box__header {
+    cursor: pointer;
+}
+.contact-box__toggle {
+    color: green;
+}
+
+.contact-box__delete {
+    font-size: 2rem;
+    color: red!important;
+    position: absolute;
+    right: 1rem;
+}
