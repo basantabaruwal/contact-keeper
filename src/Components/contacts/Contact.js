@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Consumer } from "../../context";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { DELETE_CONTACT } from "../../app-constants";
 
 class Contact extends React.Component {
   state = {
@@ -13,13 +16,25 @@ class Contact extends React.Component {
     });
   };
 
-  onDeleteClick = (id, dispatch) => {
-    // console.log("onDeleteClick");
+  onEditClick = async (id, dispatch) => {
+    console.log("onEditClick");
+  }
+
+  onDeleteClick = async (id, dispatch) => {
+    // // console.log("onDeleteClick");
+    // const action_delete = {
+    //     type: 'DELETE_CONTACT',
+    //     payload: id
+    // }
+    // dispatch(action_delete)
+
     const action_delete = {
-        type: 'DELETE_CONTACT',
-        payload: id
-    }
-    dispatch(action_delete)
+      type: DELETE_CONTACT,
+      payload: id
+    };
+
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+    dispatch(action_delete);
   };
 
   render() {
@@ -27,7 +42,7 @@ class Contact extends React.Component {
     return (
       <Consumer>
         {value => {
-            const { dispatch } = value;
+          const { dispatch, contact } = value;
           return (
             <div className="contact-box card card-body mb-3">
               <h4
@@ -41,12 +56,22 @@ class Contact extends React.Component {
                   &nbsp;&nbsp;
                 </i>
               </h4>
+              
+              {/* <Link to={`contact/edit/${id}`} */}
+              <Link to={`contact/edit/${id}`}
+                className="contact-box__edit fas fa-pen text-warning"
+                onClick={this.onEditClick.bind(this, id, contact)}
+                style={{ cursor: "pointer" }}
+              >
+                &nbsp;
+              </Link>
               <i
                 className="contact-box__delete fas fa-times text-danger"
                 onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 style={{ cursor: "pointer" }}
-              ></i>
-
+              >
+                &nbsp;
+              </i>
               {this.state.expanded ? (
                 <ul className="list-group">
                   <li className="list-group-item">Email: {email} </li>

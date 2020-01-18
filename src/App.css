@@ -40,3 +40,8 @@ li {
     position: absolute;
     right: 1rem;
 }
+
+.contact-box__edit {
+    position: absolute;
+    right: 4rem;
+}

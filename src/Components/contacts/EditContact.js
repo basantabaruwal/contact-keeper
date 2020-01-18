@@ -3,15 +3,29 @@ import { Consumer } from "../../context";
 import uuid from "uuid";
 import TextInputGroup from "../layout/TextInputGroup";
 import axios from "axios";
-import { ADD_CONTACT } from "../../app-constants";
+import { EDIT_CONTACT } from "../../app-constants";
 
-class AddContact extends Component {
+class EditContact extends Component {
   state = {
     name: "",
     email: "",
     phone: "",
     errors: { name: "", email: "", phone: "" }
   };
+
+  async componentDidMount(){
+    const { id } = this.props.match.params;
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+
+    const contact  = response.data;
+
+    this.setState({
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone
+    })
+  }
+
 
   onFormControlChanged = e => {
     this.setState({
@@ -50,33 +64,23 @@ class AddContact extends Component {
       return;
     }
 
-    // const newContact = {
-    //   id: uuid(),
-    //   name,
-    //   email,
-    //   phone
-    // };
-
-    // dispatch({
-    //   type: "ADD_CONTACT",
-    //   payload: newContact
-    // });
-
-    const newContact = {
+    const proposedContact = {
       name,
       email,
       phone
-    };
+    }
 
-    const response = await axios.post(
-      "https://jsonplaceholder.typicode.com/users",
-      newContact
-    );
+    //  attempt to edit the selected contact
+    const {id} = this.props.match.params;
+    const response = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, proposedContact);
 
+    // send the contact with received new contact
     dispatch({
-      type: ADD_CONTACT,
+      type: EDIT_CONTACT,
       payload: response.data
     });
+
+  
     // clear the state
     this.setState({
       name: "",
@@ -89,9 +93,6 @@ class AddContact extends Component {
     this.props.history.push("/");
   };
 
-  saveAndAddAnother = () => {
-    console.log("Save and add another.");
-  };
 
   render() {
     const { name, email, phone, errors } = this.state;
@@ -99,10 +100,10 @@ class AddContact extends Component {
     return (
       <Consumer>
         {value => {
-          const { dispatch } = value;
+          const { dispatch, contact } = value;
           return (
             <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
+              <div className="card-header">Edit Contact</div>
               <div className="card-body">
                 <form
                   className="form"
@@ -138,20 +139,9 @@ class AddContact extends Component {
                     onChange={this.onFormControlChanged}
                     error={errors.phone}
                   />
-                  <div className="btn-group btn-block">
-                    <button
-                      className="btn btn-primary btn-lg"
-                      data-redirect="false"
-                    >
-                      Save and Add Another
-                    </button>
-                    <button
-                      className="btn btn-info btn-lg"
-                      data-redirect="true"
-                    >
-                      Save
-                    </button>
-                  </div>
+                  <button className="btn btn-info btn-lg" data-redirect="true">
+                    Update Contact
+                  </button>
                 </form>
               </div>
             </div>
@@ -162,4 +152,4 @@ class AddContact extends Component {
   }
 }
 
-export default AddContact;
+export default EditContact;

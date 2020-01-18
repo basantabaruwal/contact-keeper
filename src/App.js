@@ -2,7 +2,11 @@ import React from "react";
 import Header from "./Components/layout/Header";
 import Contacts from "./Components/contacts/Contacts";
 import AddContact from "./Components/contacts/AddContact";
+import EditContact from "./Components/contacts/EditContact";
+import About from "./Components/Pages/About";
+import Page404 from "./Components/Pages/Page404";
 import Provider from "./context";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -14,15 +18,20 @@ class App extends React.Component {
     console.log("Rendering component App");
     return (
       <Provider>
-        <div className="App">
-          <Header branding="Contact Manager" />
-          <div className="container">
-            <AddContact />
-            <div className="contacts">
-              <Contacts />
+        <Router>
+          <div className="App">
+            <Header branding="Contact Manager" />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Contacts} />
+                <Route exact path="/contact/add" component={AddContact} />
+                <Route exact path="/contact/edit/:id" component={EditContact} />
+                <Route exact path="/about" component={About} />
+                <Route component={Page404} />
+              </Switch>
             </div>
           </div>
-        </div>
+        </Router>
       </Provider>
     );
   }
