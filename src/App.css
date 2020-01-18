@@ -22,6 +22,9 @@ li {
 }
 
 /* App specific css */
+.app-heading {
+    font-size: 2.6rem;
+}
 .contact-box {
     background: violet;
     position: relative;
@@ -44,4 +47,21 @@ li {
 .contact-box__edit {
     position: absolute;
     right: 4rem;
+}
+/* About */
+.about-box {
+    padding: 3rem 5rem;
+    background: #eee;
+}
+
+.about__header {
+}
+
+.about__lead {
+    font-size: 2rem;
+}
+
+.about__extra {
+    font-size: 1.5rem;
+    color: rgba(192, 0, 0, 1);
 }

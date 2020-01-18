@@ -102,8 +102,14 @@ class EditContact extends Component {
         {value => {
           const { dispatch, contact } = value;
           return (
-            <div className="card mb-3">
-              <div className="card-header">Edit Contact</div>
+            <div className="card mb-3"
+              style={{
+                margin: "0 auto",
+                padding: "4rem",
+                boxShadow: "0 .5rem 1.0rem 3px rgba(0, 0, 0, 0.10)"
+              }}
+            >
+              <div className="card-header mb-3">Edit Contact</div>
               <div className="card-body">
                 <form
                   className="form"

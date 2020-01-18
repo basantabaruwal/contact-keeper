@@ -101,8 +101,15 @@ class AddContact extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
+            <div
+              className="card mb-3 col-6 center"
+              style={{
+                margin: "0 auto",
+                padding: "4rem",
+                boxShadow: "0 .5rem 1.0rem 3px rgba(0, 0, 0, 0.10)"
+              }}
+            >
+              <h2 className="card-header py-5">Add Contact</h2>
               <div className="card-body">
                 <form
                   className="form"
@@ -138,19 +145,21 @@ class AddContact extends Component {
                     onChange={this.onFormControlChanged}
                     error={errors.phone}
                   />
-                  <div className="btn-group btn-block">
-                    <button
-                      className="btn btn-primary btn-lg"
-                      data-redirect="false"
-                    >
-                      Save and Add Another
-                    </button>
-                    <button
-                      className="btn btn-info btn-lg"
-                      data-redirect="true"
-                    >
-                      Save
-                    </button>
+                  <div className="form-group py-5">
+                    <div className="btn-group btn-block">
+                      <button
+                        className="btn btn-primary btn-lg"
+                        data-redirect="false"
+                      >
+                        Save and Add Another
+                      </button>
+                      <button
+                        className="btn btn-info btn-lg"
+                        data-redirect="true"
+                      >
+                        Save
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

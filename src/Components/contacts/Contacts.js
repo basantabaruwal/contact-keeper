@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Contact from "./Contact";
 import { Consumer } from "../../context";
-import EditContact from "./EditContact";
 
 class Contacts extends Component {
 
@@ -12,8 +11,7 @@ class Contacts extends Component {
           const { contacts } = value;
           return (
             <React.Fragment>
-              {/* <EditContact /> */}
-              <h1 className="display-4 mb-2">
+              <h1 className="display-4 mb-5 my-5">
                 <span className="text-danger">Contact</span>  List
               </h1>
               {contacts.map(contact => (

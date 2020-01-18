@@ -9,6 +9,7 @@ import Provider from "./context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { APP_NAME } from "./app-constants";
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,8 +21,8 @@ class App extends React.Component {
       <Provider>
         <Router>
           <div className="App">
-            <Header branding="Contact Manager" />
-            <div className="container">
+            <Header branding={`${APP_NAME}`} />
+            <div className="container" style={{marginTop: '8rem'}}>
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContact} />
