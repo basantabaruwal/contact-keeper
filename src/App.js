@@ -6,7 +6,9 @@ import EditContact from "./Components/contacts/EditContact";
 import About from "./Components/Pages/About";
 import Page404 from "./Components/Pages/Page404";
 import Provider from "./context";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// for publishing this app to github change BrowserRouter to HashRouter
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
